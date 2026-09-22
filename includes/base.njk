@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ title }}</title>
+<title>{{ title or site.name }}</title>
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-<meta name="description" content="{{ description }}">
+{% if description %}<meta name="description" content="{{ description }}">{% endif %}
+{% if site.noindex %}<meta name="robots" content="noindex,follow">{% endif %}
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
@@ -44,6 +45,12 @@
   </div>
 </header>
 
+{% if pageHeading %}
+<div class="page-head">
+  <div class="wrap"><h1>{{ pageHeading }}</h1></div>
+</div>
+{% endif %}
+
 <main id="content">
 {{ content | safe }}
 </main>
@@ -56,6 +63,5 @@
 </footer>
 
 <script src="/assets/js/main.js" defer></script>
-{% if site.hasOrderForm %}<script src="/assets/js/order-form.js" defer></script>{% endif %}
 </body>
 </html>
