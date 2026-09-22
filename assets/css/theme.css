@@ -206,7 +206,13 @@ body {
 .lang-switcher-menu li a:hover { background: var(--color-bg-alt); }
 
 @media (max-width: 860px) {
-  .nav-toggle { display: block; }
+  .nav-toggle {
+    display: block;
+    /* Pushes the toggle (and the language switcher, if present) to the
+       right edge of the header — .site-nav is hidden until opened, so it
+       doesn't take up row space to push against. */
+    margin-left: auto;
+  }
   .site-nav {
     display: none;
     width: 100%;
