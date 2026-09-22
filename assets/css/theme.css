@@ -56,31 +56,42 @@ body {
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 20px;
   min-height: 64px;
-  flex-wrap: wrap;
   position: relative;
 }
-.site-nav {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.site-nav ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 4px 20px;
-  margin: 0;
-  padding: 0;
-}
+/* Brand and nav each own a column: the brand never wraps or shrinks,
+   the nav takes the rest and clips overflow into a "More" dropdown
+   (see .site-nav-more and main.js) instead of wrapping to a new line. */
 .brand {
+  flex: 0 0 auto;
   color: var(--color-ink);
   font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
   font-size: 1.1rem;
+  white-space: nowrap;
+}
+.site-nav {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px 20px;
+  overflow: hidden;
+}
+.site-nav ul#site-nav-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px 20px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.site-nav ul#site-nav-list li {
+  flex: 0 0 auto;
 }
 .site-nav a {
   color: var(--color-ink);
@@ -88,8 +99,50 @@ body {
   font-size: 0.85rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .site-nav a:hover { color: var(--color-accent); }
+
+/* "More" overflow dropdown: main.js moves nav items that don't fit the
+   available width in here. Desktop only — mobile always shows the full
+   list in the hamburger panel (see the 860px breakpoint below). */
+.site-nav-more {
+  position: relative;
+  flex: 0 0 auto;
+}
+.site-nav-more-toggle {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  white-space: nowrap;
+  padding: 4px 0;
+}
+.site-nav-more-toggle:hover { color: var(--color-accent); }
+.site-nav-more-menu {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  min-width: 200px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  z-index: 150;
+}
+.site-nav-more-menu li { padding: 0; }
+.site-nav-more-menu a {
+  display: block;
+  padding: 8px 16px;
+}
+.site-nav-more-menu a:hover { background: var(--color-bg-alt); }
 
 /* Inline top nav on desktop; collapses behind a menu toggle on tablet/mobile
    and on any narrow/resized viewport (breakpoint below). */
@@ -111,6 +164,7 @@ body {
 /* Language switcher (only rendered on sites with site.langSwitcher set) */
 .lang-switcher {
   position: relative;
+  flex: 0 0 auto;
 }
 .lang-switcher-toggle {
   display: flex;
@@ -163,7 +217,17 @@ body {
     padding: 10px 20px 20px;
   }
   .site-nav.is-open { display: block; }
-  .site-nav ul { flex-direction: column; gap: 12px; }
+  /* Mobile always shows the full nav stacked, no clipping/overflow menu —
+     that's a desktop-only affordance (see .site-nav-more, main.js). The
+     #site-nav-list id makes the base desktop rule more specific than a
+     plain ".site-nav ul" here would be, so this override needs to match it. */
+  .site-nav ul#site-nav-list {
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: visible;
+    gap: 12px;
+  }
+  .site-nav-more { display: none; }
 }
 
 /* Hero */

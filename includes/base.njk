@@ -23,12 +23,18 @@
       <span class="nav-toggle-bar"></span>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
-      <ul>
+      <ul id="site-nav-list">
         {% for item in nav %}
         <li><a href="{{ item.href }}">{{ item.label }}</a></li>
         {% endfor %}
         <li><a href="{{ site.parentSiteUrl }}">{{ site.parentSiteName }}</a></li>
       </ul>
+      <div class="site-nav-more">
+        <button type="button" class="site-nav-more-toggle" id="site-nav-more-toggle" aria-expanded="false" aria-controls="site-nav-more-menu" hidden>
+          More <span aria-hidden="true">&#9662;</span>
+        </button>
+        <ul id="site-nav-more-menu" class="site-nav-more-menu" hidden></ul>
+      </div>
     </nav>
     {% if site.langSwitcher %}
     <div class="lang-switcher">
