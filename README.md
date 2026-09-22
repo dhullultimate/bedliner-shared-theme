@@ -8,9 +8,16 @@ Fordbedlinerrepair, Gmbedlinerrepair. Visual reference is Toyotabedliner.
 
 - `includes/base.njk` — the canonical Eleventy layout (header/nav/hero-adjacent/footer).
   Nav links come from each site's own `nav` data (see below). A language switcher
-  renders only when a site's `_data/site.js` sets `site.langSwitcher`.
-- `assets/css/style.css` — the canonical design system (colors, type, header, hero,
+  renders only when a site's `_data/site.js` sets `site.langSwitcher`. Links two
+  stylesheets: `theme.css` (this repo's, synced) then `site.css` (the site's own,
+  never touched by sync — see below).
+- `assets/css/theme.css` — the canonical design system (colors, type, header, hero,
   sections, forms, buttons, footer). One set of class names across all four sites.
+  Each site keeps its own `src/assets/css/site.css` for page-body styles theme.css
+  doesn't cover (e.g. a site's own order-parts table layout). When porting a site
+  onto this theme, remove from its `site.css` any selector theme.css already
+  defines (`.site-header`, `.hero`, `.site-footer`, `button[type="submit"]`, etc.)
+  so the shared styling isn't silently overridden by cascade order.
 - `assets/js/main.js` — nav toggle + language-switcher toggle. (Order-form JS is
   **not** shared — each site's order-parts page markup differs enough that its form
   script stays local to that repo.)

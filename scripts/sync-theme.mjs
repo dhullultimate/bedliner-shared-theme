@@ -26,7 +26,9 @@ mkdirSync(join(srcDir, "assets", "css"), { recursive: true });
 mkdirSync(join(srcDir, "assets", "js"), { recursive: true });
 
 cpSync(join(themeRoot, "includes", "base.njk"), join(srcDir, "_includes", "base.njk"));
-cpSync(join(themeRoot, "assets", "css", "style.css"), join(srcDir, "assets", "css", "style.css"));
+cpSync(join(themeRoot, "assets", "css", "theme.css"), join(srcDir, "assets", "css", "theme.css"));
 cpSync(join(themeRoot, "assets", "js", "main.js"), join(srcDir, "assets", "js", "main.js"));
 
-console.log(`sync-theme: synced base.njk / style.css / main.js from ${themeRoot}`);
+console.log(`sync-theme: synced base.njk / theme.css / main.js from ${themeRoot}`);
+// Note: src/assets/css/site.css is this site's OWN file (page-specific
+// styles not covered by theme.css) and is intentionally never touched here.
