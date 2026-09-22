@@ -79,7 +79,6 @@ body {
   align-items: center;
   justify-content: flex-end;
   gap: 4px 20px;
-  overflow: hidden;
 }
 .site-nav ul#site-nav-list {
   list-style: none;
@@ -88,6 +87,7 @@ body {
   gap: 4px 20px;
   margin: 0;
   padding: 0;
+  min-width: 0;
   overflow: hidden;
 }
 .site-nav ul#site-nav-list li {
