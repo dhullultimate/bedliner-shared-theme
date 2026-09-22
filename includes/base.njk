@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta name="description" content="{{ description }}">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">{{ site.name }}</a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">Menu</span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        {% for item in nav %}
+        <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+        {% endfor %}
+        <li><a href="{{ site.parentSiteUrl }}">{{ site.parentSiteName }}</a></li>
+      </ul>
+    </nav>
+    {% if site.langSwitcher %}
+    <div class="lang-switcher">
+      <button type="button" class="lang-switcher-toggle" aria-expanded="false" aria-controls="lang-switcher-menu">
+        <img src="{{ site.langSwitcher.current.flag }}" alt="" width="16" height="11">
+        <span>{{ site.langSwitcher.current.label }}</span>
+      </button>
+      <ul id="lang-switcher-menu" class="lang-switcher-menu">
+        {% for lang in site.langSwitcher.options %}
+        <li><a href="{{ lang.href }}" hreflang="{{ lang.hreflang }}" lang="{{ lang.hreflang }}"><img src="{{ lang.flag }}" alt="" width="16" height="11"><span>{{ lang.label }}</span></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+<main id="content">
+{{ content | safe }}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="back-to-top" href="#page" aria-label="Back to top">&#8593;</a>
+    <p>Copyright &copy; {{ site.year }} {{ site.name }} &mdash; a {{ site.brand }} company</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js" defer></script>
+{% if site.hasOrderForm %}<script src="/assets/js/order-form.js" defer></script>{% endif %}
+</body>
+</html>

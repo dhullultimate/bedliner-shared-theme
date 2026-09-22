@@ -1,0 +1,11 @@
+{
+  "name": "bedliner-theme",
+  "version": "1.0.0",
+  "description": "Shared Eleventy chrome (layout, CSS, nav JS) and canonical SDS documents for the Ultimate Linings OEM bedliner-repair clone sites (Toyota, SE Toyota, Ford, GM).",
+  "private": true,
+  "files": [
+    "includes",
+    "assets",
+    "docs"
+  ]
+}
